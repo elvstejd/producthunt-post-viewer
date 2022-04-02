@@ -1,9 +1,8 @@
-import { Button, Card, Image, Kbd, Text, Title, useMantineTheme } from "@mantine/core";
-// import { useHotkeys } from "@mantine/hooks";
-import { createRef } from "react";
-import { useMemo } from "react";
+import { Button, Card, Drawer, Image, Kbd, Paper, Stack, Text, Title, useMantineTheme } from "@mantine/core";
+import { useState } from "react";
+import { createRef, useMemo } from "react";
 import TinderCard from "react-tinder-card";
-import { savePost } from "./services/local-db";
+import { savePost, getPosts } from "./services/local-db";
 
 const data = [
   {
@@ -25,6 +24,7 @@ const data = [
 
 function App() {
   const theme = useMantineTheme();
+  const [drawerOpened, setDrawerOpened] = useState(true);
 
   const cardRefs = useMemo(
     () =>
@@ -32,11 +32,7 @@ function App() {
         .fill(0)
         .map((i) => createRef()),
     []
-  )
-
-  // useHotkeys([
-  //   ['ArrowRight',]
-  // ])
+  );
 
   function save(post) {
     savePost(post);
@@ -71,6 +67,45 @@ function App() {
           </TinderCard>
         ))}
       </div>
+      <Drawer
+        position='right'
+        opened={drawerOpened}
+        size='30rem'
+        onClose={() => setDrawerOpened(false)}
+        styles={{
+          drawer: {
+            overflow: 'auto'
+          }
+        }}
+
+      >
+        <Title order={4} style={{ marginLeft: theme.spacing.sm }}>Your Saved Posts</Title>
+        <Stack style={{ padding: theme.spacing.sm }}>
+          {getPosts().map(post => (
+            <>
+              <Paper
+                shadow='sm'
+                withBorder
+                style={{ display: 'flex', overflow: 'hidden' }}
+                sx={(theme) => ({
+                  '&:hover': {
+                    backgroundColor: theme.colors.gray[0],
+                    cursor: 'pointer'
+                  }
+                })}
+              >
+                <Card.Section>
+                  <Image src={post.media} />
+                </Card.Section>
+                <div style={{ padding: theme.spacing.sm }}>
+                  <Text weight='bold' color='gray'>{post.name}</Text>
+                  <Text>{post.description}</Text>
+                </div>
+              </Paper>
+            </>
+          ))}
+        </Stack>
+      </Drawer>
     </div>
   );
 }
