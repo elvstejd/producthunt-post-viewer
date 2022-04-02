@@ -8,7 +8,8 @@ I like browsing Product Hunt either for inspiration or to find cool new software
 
 ## To-Do
 
-- [ ] Save liked posts to local storage
+- [ ] Connect to Product Hunt API
+- [x] Save liked posts to local storage
 - [ ] Show liked posts
 - [ ] Use keyboard (arrow keys, spacebar) to interact with current visible post
 
