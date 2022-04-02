@@ -10,6 +10,8 @@ I like browsing Product Hunt either for inspiration or to find cool new software
 
 - [ ] Connect to Product Hunt API
 - [x] Save liked posts to local storage
+- [ ] Add button to open drawer
+- [ ] Place skip/next buttons on the bottom
 - [ ] Show liked posts
 - [ ] Use keyboard (arrow keys, spacebar) to interact with current visible post
 
