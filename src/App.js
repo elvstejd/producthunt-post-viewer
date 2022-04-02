@@ -3,6 +3,7 @@ import { Button, Card, Image, Kbd, Text, Title, useMantineTheme } from "@mantine
 import { createRef } from "react";
 import { useMemo } from "react";
 import TinderCard from "react-tinder-card";
+import { savePost } from "./services/local-db";
 
 const data = [
   {
@@ -38,7 +39,7 @@ function App() {
   // ])
 
   function save(post) {
-    console.log(post);
+    savePost(post);
   }
 
   // async function remoteSwipe(dir) {
