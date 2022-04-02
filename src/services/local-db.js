@@ -1,20 +1,19 @@
 const SAVED_POSTS_KEY = 'saved_posts';
 
-function _readPostsFromLocalStorage() {
+function readPostsFromLocalStorage() {
   return JSON.parse(localStorage.getItem(SAVED_POSTS_KEY)) || [];
 }
 
-function _writePostsToLocalStorage(data) {
+function writePostsToLocalStorage(data) {
   localStorage.setItem(SAVED_POSTS_KEY, JSON.stringify(data));
 }
 
 export function savePost(post) {
-  let posts = _readPostsFromLocalStorage();
+  let posts = readPostsFromLocalStorage();
   posts.push(post);
-  console.log(posts);
-  _writePostsToLocalStorage(posts);
+  writePostsToLocalStorage(posts);
 }
 
 export function getPosts() {
-  return _readPostsFromLocalStorage();
+  return readPostsFromLocalStorage();
 }
